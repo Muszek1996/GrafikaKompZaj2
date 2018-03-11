@@ -1,0 +1,2 @@
+# GrafikaKompZaj2
+grafika
