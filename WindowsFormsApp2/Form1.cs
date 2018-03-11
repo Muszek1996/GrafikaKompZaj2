@@ -232,8 +232,9 @@ namespace WindowsFormsApp2
         private void button8_Click(object sender, EventArgs e)
         {
             double iloscPtk = 4;
-            double licznik = (Double.Parse(numericUpDown3.Text));
-            double mianownik = (Double.Parse(numericUpDown4.Text));
+            double licznik = (Double.Parse(numericUpDown4.Text));
+            double mianownik = (Double.Parse(numericUpDown4.Text))+1;
+            int iloscKwadratow = (int)(Double.Parse(numericUpDown3.Text));
             Punkt[] tablica = new Punkt[(int)iloscPtk];
             double przyrost = 2 * Math.PI / iloscPtk;
             double alfa = 0.0+ 2 * Math.PI /8;
@@ -247,7 +248,7 @@ namespace WindowsFormsApp2
 
 
 
-           for(int j = 0; j < 21; j++)
+           for(int j = 0; j < iloscKwadratow; j++)
             {
                 for (int i = 0; i < iloscPtk; i++)
                 {
@@ -262,6 +263,59 @@ namespace WindowsFormsApp2
 
 
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            double iloscPtk = 4;
+            double licznik = (Double.Parse(numericUpDown4.Text));
+            double mianownik = (Double.Parse(numericUpDown4.Text)) + 1;
+            int iloscKwadratow = (int)(Double.Parse(numericUpDown3.Text));
+            Punkt[] tablica = new Punkt[(int)iloscPtk];
+            double przyrost = 2 * Math.PI / iloscPtk;
+            double alfa = 0.0 + 2 * Math.PI / 8;
+            double r = 50;
+
+            Punkt backup = center;
+            center.x -= 150;
+            center.y -= 150;
+
+            for (int f = 0; f< 5; f++)
+            {
+                for (int z = 0; z < 5; z++)
+                {
+
+
+
+                    for (int i = 0; i < iloscPtk; i++)
+                    {
+                        alfa += przyrost;
+                        tablica[i] = new Punkt((float)(r * Math.Cos(alfa)), (float)(r * Math.Sin(alfa))) + center;
+                    }
+
+
+
+
+                    for (int j = 0; j < iloscKwadratow; j++)
+                    {
+                        for (int i = 0; i < iloscPtk; i++)
+                        {
+                            g.DrawLine(pen1, (float)tablica[i].x, (float)tablica[i].y, (float)tablica[(i + 1) % (int)iloscPtk].x, (float)tablica[(i + 1) % (int)iloscPtk].y);
+                        }
+                        for (int k = 0; k < 4; k++)
+                            tablica[k] = new Punkt((((licznik * tablica[k].x) + (tablica[(k + 1) % (int)iloscPtk].x))) / mianownik, (((licznik * tablica[k].y) + (tablica[(k + 1) % (int)iloscPtk].y))) / mianownik);
+                    }
+                    center.x += 73;
+                }
+                center.x -= 73 * 5;
+                center.y += 73;
+
+
+            }
+                
+
+
+
         }
+    }
     
 }
